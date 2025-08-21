@@ -1,0 +1,23 @@
+# Subdirectory repositories
+astro-portfolio-site/
+astro-docs-site/
+astro-landing-site/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor directories
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.cache/
