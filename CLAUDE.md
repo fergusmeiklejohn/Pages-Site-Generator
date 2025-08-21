@@ -174,3 +174,67 @@ When creating or modifying sites, consider these migration test cases:
 ---
 
 *End of Session 1*
+
+### Session 2: January 21, 2025 (Continued)
+
+#### Tasks Completed
+1. **Fixed styling issues in astro-landing-site**:
+   - Resolved hero content alignment (now properly centered)
+   - Fixed horizontal padding issues across all sections
+   - Made container and essential styles global to ensure proper application
+
+#### Key Decisions & Rationale
+
+1. **Global Styles Solution**:
+   - **Problem**: Astro was scoping styles to the Layout component, but child components weren't receiving the scoped attributes
+   - **Solution**: Used `:global()` selector for essential styles like `.container`, `.btn`, etc.
+   - **Why**: Ensures styles apply consistently across all components regardless of Astro's component scoping
+   - **Result**: Proper padding (60px desktop, 40px tablet, 24px mobile) now applies throughout the site
+
+2. **Incremental Padding Adjustments**:
+   - **Started with**: 40px desktop, 20px mobile
+   - **Adjusted to**: 60px desktop, 40px tablet, 24px mobile
+   - **Rationale**: Provides better visual breathing room and improves readability on all screen sizes
+
+#### Learnings & Discoveries
+
+1. **Astro Component Scoping**:
+   - Astro automatically scopes styles within components using data attributes
+   - Components imported from other files don't inherit the parent's scoped styles
+   - The `:global()` selector is essential for truly global styles in Astro
+   - This is similar to CSS Modules but applied at the component level
+
+2. **Build Output Analysis**:
+   - Examining the generated HTML helped identify the scoping issue
+   - The `[data-astro-cid-*]` attributes showed which elements had scoped styles
+   - This debugging approach is valuable for understanding Astro's build process
+
+3. **Real-time Testing Benefits**:
+   - Having the user check changes in real-time accelerated the debugging process
+   - Live feedback helped identify that the issue wasn't just padding values but style application
+
+#### Next Actions
+
+1. **Push Changes to GitHub**:
+   - [ ] Push the styling fixes to the repository
+   - [ ] Verify the site deploys correctly on Cloudflare Pages
+
+2. **Complete Cloudflare Pages Deployment**:
+   - [ ] Deploy all three sites via Cloudflare dashboard
+   - [ ] Document the deployment URLs in each repository's README
+   - [ ] Test that all features work in production environment
+
+3. **Enhance Migration Test Coverage** (Future):
+   - [ ] Consider adding more complex test cases as needed
+   - [ ] Document any deployment-specific issues discovered
+   - [ ] Create automated tests for the migration script
+
+#### Session Notes
+- Fixed critical styling issues that would have affected user experience
+- Learned valuable lessons about Astro's component scoping behavior
+- All three test sites are now production-ready
+- Good foundation for testing the Pages-to-Workers migration script
+
+---
+
+*End of Session 2*
