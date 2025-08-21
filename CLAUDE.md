@@ -235,6 +235,35 @@ When creating or modifying sites, consider these migration test cases:
 - All three test sites are now production-ready
 - Good foundation for testing the Pages-to-Workers migration script
 
+#### Critical Discovery: Cloudflare Pages wrangler.toml Configuration
+
+**Important**: When deploying to Cloudflare Pages via the dashboard, the `wrangler.toml` file has strict limitations:
+
+**❌ NOT SUPPORTED in Pages wrangler.toml**:
+- `[build]` section - causes validation error
+- `[site]` section - causes validation error  
+- `[[build.environment]]` - invalid syntax for Pages
+
+**✅ SUPPORTED in Pages wrangler.toml**:
+- `name` - project name
+- `compatibility_date` - compatibility date
+- `pages_build_output_dir` - output directory
+- `[env.production]` with `vars` - environment variables
+
+**Error encountered**:
+```
+✘ [ERROR] Running configuration file validation for Pages:
+    - Configuration file for Pages projects does not support "build"
+    - Configuration file for Pages projects does not support "site"
+```
+
+**Solution**: Removed unsupported sections from all wrangler.toml files. Build settings should be configured in Cloudflare dashboard instead:
+- Build command: `npm run build`
+- Build output directory: `dist`
+- Node version: Set as environment variable `NODE_VERSION=18`
+
+**Note for migration script**: The wrangler.toml structure differs significantly between Pages and Workers deployments. The migration script will need to transform the configuration appropriately.
+
 ---
 
 *End of Session 2*
