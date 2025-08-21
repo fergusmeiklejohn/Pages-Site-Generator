@@ -1,8 +1,3 @@
-# Subdirectory repositories
-astro-portfolio-site/
-astro-docs-site/
-astro-landing-site/
-
 # OS files
 .DS_Store
 Thumbs.db
